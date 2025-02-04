@@ -15,9 +15,9 @@ async def handler(websocket, path):
 
 async def main():
     try:
-        start_server = websockets.serve(handler, "0.0.0.0", 5000)
+        start_server = websockets.serve(handler, "0.0.0.0", 8080)
         await start_server
-        print("Server started on port 5000.")
+        print("Server started on port 8080.")
         await asyncio.Future()  # Giữ server chạy mãi
     except Exception as e:
         print(f"❌ Server failed to start: {e}")
