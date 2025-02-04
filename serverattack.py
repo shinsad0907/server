@@ -10,7 +10,9 @@ async def handler(websocket, path):
     except websockets.exceptions.ConnectionClosed:
         print("❌ Client disconnected!")
 
-start_server = websockets.serve(handler, "0.0.0.0", 5000)
+async def start_server():
+    server = await websockets.serve(handler, "0.0.0.0", 5000)
+    await server.wait_closed()
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+# Thay vì sử dụng `asyncio.get_event_loop()`, hãy dùng `asyncio.run()`
+asyncio.run(start_server())
