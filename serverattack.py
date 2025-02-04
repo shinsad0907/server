@@ -1,3 +1,5 @@
+# server.py
+import os
 import asyncio
 import websockets
 
@@ -15,10 +17,11 @@ async def handler(websocket, path):
         print("❌ Client disconnected!")
 
 async def main():
-    # Chạy server WebSocket trên Railway URL
-    start_server = websockets.serve(handler, "0.0.0.0", 5000)
+    # Lấy cổng từ Railway hoặc mặc định là 5000
+    port = int(os.environ.get("PORT", 5000))
+    start_server = websockets.serve(handler, "0.0.0.0", port)
     await start_server
-    print("Server started on port 5000.")
+    print(f"Server started on port {port}.")
     await asyncio.Future()  # Giữ server chạy mãi
 
 # Khởi động vòng lặp sự kiện
